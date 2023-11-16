@@ -1,0 +1,10 @@
+{
+  "canisters": {
+    "dynamic_assets": {
+      "type": "assets",
+      "source": []
+    }
+  },
+  "dfx": "0.15.1",
+  "version": 1
+}
