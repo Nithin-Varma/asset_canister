@@ -1,5 +1,12 @@
 {
   "canisters": {
+    "hello_assets": {
+      "frontend": {
+        "entrypoint": "out/index.html"
+      },
+      "source": ["out"],
+      "type": "assets"
+    },
     "dynamic_assets": {
       "type": "assets",
       "source": []

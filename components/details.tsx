@@ -22,20 +22,9 @@ import {
 import { useState } from "react"
 import { useToast, Spinner } from "@chakra-ui/react";
 
-// import { initJuno } from "@junobuild/core-peer";
-// import { v4 as uuidv4 } from 'uuid';
-// import { signIn, signOut, authSubscribe } from "@junobuild/core-peer";
 import { User } from "./types"
 import { AssetManager } from "@dfinity/assets"
-// import { AuthClient } from "@dfinity/auth-client";
 import { HttpAgent } from "@dfinity/agent"
-// import { Asset } from '@junobuild/core-peer';
-// import { Principal } from '@dfinity/principal';
-// import { uploadFile } from "@junobuild/core-peer";
-
-// type Record = {
-//   asset : File
-// };
 
 const Details = () => {
   // const [agentt, setAgent] = useState<HttpAgent>();

@@ -35,7 +35,7 @@ import { useToast } from '@chakra-ui/react'
           identityProvider:"https://identity.ic0.app",
           onSuccess: (()=> {
             console.log("connected")
-            window.location.href+="/asset"
+            window.location.href+="asset"
             toast({
                 title: 'Logged In...',
                 description: "Ready to use...",
