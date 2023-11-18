@@ -22,6 +22,7 @@
     "sync:image": "DFX_NETWORK=local && rsync -avr .dfx/$(echo ${DFX_NETWORK:-'**'})/canisters/image --exclude='idl/' --exclude='*.wasm' --delete ui/declarations"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.7",
     "@types/node": "^20.9.0",
     "@types/react": "^18.2.37",
     "@types/uuid": "^9.0.7",
@@ -48,6 +49,7 @@
     "buffer": "^6.0.3",
     "compressorjs": "^1.2.1",
     "events": "^3.3.0",
+    "file-saver": "^2.0.5",
     "framer-motion": "^10.16.4",
     "next": "^13.5.2",
     "react": "^18.2",

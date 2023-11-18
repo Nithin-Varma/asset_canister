@@ -3,6 +3,8 @@
 import {
   Button,
   Flex,
+  FormControl,
+  FormLabel,
   Input,
   InputGroup,
   Stack,
@@ -14,8 +16,9 @@ import { useState } from "react";
 // import { signIn, signOut, authSubscribe } from "@junobuild/core-peer";
 import {User} from "./types"
 import { AssetManager } from "@dfinity/assets";
-import { AuthClient } from "@dfinity/auth-client";
+// import { AuthClient } from "@dfinity/auth-client";
 import { HttpAgent } from "@dfinity/agent";
+// import { Asset } from '@junobuild/core-peer';
 // import { Principal } from '@dfinity/principal';
 // import { uploadFile } from "@junobuild/core-peer";
 
@@ -27,31 +30,35 @@ import { HttpAgent } from "@dfinity/agent";
 
 
 const Details = () => {
-  const [agentt, setAgent] = useState<HttpAgent>();
+  // const [agentt, setAgent] = useState<HttpAgent>();
     const [user, setUser] = useState<User>({
-      asset: null
+      asset: null,
+      filename: ""
     });
-    const login = async() => {
-      const authClient = await AuthClient.create();
-      authClient.login({
-        identityProvider:"https://identity.ic0.app",
-        onSuccess: (()=> {
-          console.log("jksldjflksdjf")
-        })
-    });
-      const identity = authClient.getIdentity();
-      const identityObject = JSON.stringify(identity);
-      console.log(`identity: ${identityObject}`)  
+    // const [fileContent, setFileContent] = useState<Asset | null | undefined>(null);
+    const url = `https://jg3in-zaaaa-aaaap-abriq-cai.icp0.io/${user.filename}`
 
-      const _agent = new HttpAgent({
-        host:"https://ic0.app"
-      })
-      console.log(`agent: ${JSON.stringify(_agent, null, 2)}`) 
-      setAgent(_agent) 
-       console.log(`identity.........: ${identity}`)
-       console.log(JSON.stringify(identity))
-       console.log(`agent.........: ${_agent}`)
-    }
+  //   const login = async() => {
+  //     const authClient = await AuthClient.create();
+  //     authClient.login({
+  //       identityProvider:"https://identity.ic0.app",
+  //       onSuccess: (()=> {
+  //         console.log("jksldjflksdjf")
+  //       })
+  //   });
+  //     const identity = authClient.getIdentity();
+  //     const identityObject = JSON.stringify(identity);
+  //     console.log(`identity: ${identityObject}`)  
+
+  //     const _agent = new HttpAgent({
+  //       host:"https://ic0.app"
+  //     })
+  //     console.log(`agent: ${JSON.stringify(_agent, null, 2)}`) 
+  //     setAgent(_agent) 
+  //      console.log(`identity.........: ${identity}`)
+  //      console.log(JSON.stringify(identity))
+  //      console.log(`agent.........: ${_agent}`)
+  //   }
 
   const getAssetManager = () => {
     return new AssetManager({
@@ -61,17 +68,34 @@ const Details = () => {
       // canisterId: "a4tbr-q4aaa-aaaaa-qaafq-cai",
       // canisterId:"xqne3-5aaaa-aaaal-adcpq-cai", //juno
       // canisterId:"asrmz-lmaaa-aaaaa-qaaeq-cai",
-      agent: agentt
+      agent: new HttpAgent({
+        host:"https://ic0.app"
+      })
     })
 
 
   }
 
-  const files = async() => {
-   const filess =  await getAssetManager().list()
-   const single_file = await getAssetManager().get('/VHS.jpeg');
-   console.log(filess)
-   console.log(single_file)
+  // function download(dataurl:string, filename:string) {
+  //   const link = document.createElement("a");
+  //   link.href = dataurl;
+  //   link.download = filename;
+  //   link.click();
+  // }
+  function download(url:string, filename:string) {
+   
+      getAssetManager().get(filename)
+      .then(async blob => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(await(blob.toBlob()));
+        link.download = filename;
+        link.click();
+    })
+    .catch(console.error);
+  }
+
+  const openFile = async() => {
+   window.open(url,"_blank");
   }
 
   return (
@@ -132,16 +156,27 @@ const Details = () => {
             Submit
           </Button>
         </Stack>
+        <FormControl>
+            <FormLabel>get file with path</FormLabel>
+            <Input 
+             placeholder='paste file name with extension'
+             type='text'
+             value={user.filename}
+             onChange={(e) => {
+              setUser({
+                ...user,
+                filename: e.target.value
+              })
+             }}
+             />
+          </FormControl>
+          <Button onClick={openFile}>Get File</Button>
+          <Button onClick={ () => {
+            download(url, `${user.filename}`)
+          }}>Download File</Button>
+
       </Stack>
     </Flex>
-
-    <Button onClick={login}>
-      Login II
-    </Button>
-
-    <Button onClick={files}>
-      Get Files
-    </Button>
     </>
   )
 }
