@@ -39,10 +39,7 @@ export default function Landing() {
             <Text
               colorScheme={'green'}
               bg={'green.400'}
-              p={4}
-              _hover={{
-                bg: 'green.500',
-              }}>
+              p={4}>
               Login and get Started
             </Text>
           </Stack>

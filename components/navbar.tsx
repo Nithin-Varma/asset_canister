@@ -71,7 +71,7 @@ import { useToast } from '@chakra-ui/react'
       <>
         <Box bg={useColorModeValue("gray.100", "gray.900")} position="fixed" px={4} w={"100%"}>
           <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-            <Box fontSize={"28px"} fontWeight={"bold"} fontFamily={"cursive"}>AzadNet</Box>
+            <Box fontSize={"28px"} fontWeight={"bold"} fontFamily={"cursive"}>Quick Buckets</Box>
   
             <Flex alignItems={"center"}>
               <Stack direction={"row"} spacing={7}>
